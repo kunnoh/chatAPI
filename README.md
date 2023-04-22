@@ -1,8 +1,17 @@
 # charRESTapi nodeJS nestJS framework
+## Clone the Application from github
+```
+git clone https://github.com/kunnoh/chatRESTapi.git
+```
 ## Installation
+Make sure you have installed nestjs
+```
+npm install -g @nestjs/cli
+```
 
+install application dependencies from npm for the application
 ```bash
-$ npm install
+npm install
 ```
 
 ## Running the app
@@ -28,7 +37,7 @@ npm run test:e2e
 
 test coverage
 ```
- npm run test:cov
+npm run test:cov
 ```
 
 # TODO:
