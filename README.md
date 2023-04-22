@@ -18,14 +18,14 @@ npm install
 <ul>
   <li>
     development
-    ```bash
+    ```
     npm run start
     ```
   </li>
 
   <li>
     run the app and debug
-    ```bash
+    ```
     npm run debug
     ```
   </li>
