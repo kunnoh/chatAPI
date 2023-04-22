@@ -6,26 +6,29 @@ $ npm install
 ```
 
 ## Running the app
-
+development
 ```bash
-# development
-$ npm run start
+npm run start
+```
 
-# production mode
-$ npm run prod
+production mode
+```bash
+npm run prod
 ```
 
 ## Test
-
+unit tests
 ```bash
-# unit tests
-$ npm run test
+npm run test
+```
+e2e tests
+```
+npm run test:e2e
+```
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+test coverage
+```
+ npm run test:cov
 ```
 
 # TODO:
