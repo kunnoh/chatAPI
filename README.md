@@ -15,17 +15,45 @@ npm install
 ```
 
 ## Running the app
-development
-```bash
-npm run start
-```
+<ul>
+  <li>
+    development
+    ```bash
+    npm run start
+    ```
+  </li>
 
-production mode
-```bash
-npm run prod
-```
+  <li>
+    run the app and debug
+    ```bash
+    npm run debug
+    ```
+  </li>
 
-## Test
+  <li>
+    lint the code
+    ```bash
+    npm run lint
+    ```
+  </li>
+
+  <li>
+    format the code using prettier
+    ```bash
+    npm run format
+    ```
+  </li>
+
+  <li>
+    production mode
+    ```bash
+    npm run prod
+    ```
+  </li>
+</ul>
+
+
+## Test the app
 unit tests
 ```bash
 npm run test
