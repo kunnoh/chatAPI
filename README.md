@@ -10,41 +10,42 @@ npm install -g @nestjs/cli
 ```
 
 install application dependencies from npm for the application
-```bash
+```
 npm install
 ```
 
 ## Running the app
-    development
-    ```
-    npm run start
-    ```
-    
-    run the app and debug
-    ```
-    npm run debug
-    ```
+development
+```
+npm run start
+```
 
-    lint the code
-    ```bash
-    npm run lint
-    ```
+run the app and debug
+```
+npm run debug
+```
 
-    format the code using prettier
-    ```bash
-    npm run format
-    ```
+lint the code
+```
+npm run lint
+```
 
-    production mode
-    ```bash
-    npm run prod
-    ```
+format the code using prettier
+```
+npm run format
+```
+
+production mode
+```
+npm run prod
+```
 
 ## Test the app
 unit tests
-```bash
+```
 npm run test
 ```
+
 e2e tests
 ```
 npm run test:e2e
@@ -52,6 +53,7 @@ npm run test:e2e
 
 test coverage
 ```
+
 npm run test:cov
 ```
 
