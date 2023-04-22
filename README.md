@@ -3,7 +3,7 @@
 ### Installation
 Clone the Application on github
 ```
-git clone https://g.com/chatrestapi.git
+git clone https://github.com/kunnoh/chatRESTapi.git
 ```
 
 got to folder
