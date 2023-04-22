@@ -1,15 +1,15 @@
 {
   "name": "chat-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "chat rest api using nodejs nestjs framework",
+  "author": "kunnoh",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "debug": "nest start --debug --watch",
     "prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
