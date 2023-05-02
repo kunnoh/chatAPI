@@ -1,4 +1,4 @@
-# charRESTapi nodeJS nestJS framework
+# chatAPI nodeJS nestJS framework
 ## Clone the Application from github
 ```
 git clone https://github.com/kunnoh/chatRESTapi.git
