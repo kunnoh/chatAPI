@@ -59,8 +59,7 @@ npm run test:cov
 
 # TODO:
 <ul>
-  <li>Add docker</li>
-  <li>Add authentication</li>
   <li>Add simple CRUD operations</li>
   <li>Add role based routes</li>
+  <li>Add role based access control</li>
 </ul>
