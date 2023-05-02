@@ -6,7 +6,8 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
     constructor(private readonly userService: UsersService, private jwtService: JwtService){}
-    async validateUser(username: string, password: string): Promise<any> {
+
+    async validateUser(username: string, password: string): Promise<object> {
         const user = await this.userService.getUser({username});
         if(!user) return null;
         const validPass = await bcrypt.compare(password, user.password);
@@ -15,7 +16,7 @@ export class AuthService {
         return null;
     }
 
-    async login(user: any) {
+    async login(user: {username: string, _id: string}): Promise<object> {
         const plod = {
             username: user.username,
             sub: user._id
