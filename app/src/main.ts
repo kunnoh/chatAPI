@@ -1,12 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const PORT = process.env.APP_PORT || 3000;
+
   app.enableCors({
     origin: '*'
-  })
+  });
+  const config = new DocumentBuilder()
+    .setTitle('ChatAPI')
+    .setDescription('API description')
+    .setVersion('1.0')
+    .addTag('chat')
+    .build();
+  const doc = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('doc', app, doc);
+
+  const PORT = process.env.APP_PORT || 3000;
   await app.listen(PORT);
 }
 bootstrap();
