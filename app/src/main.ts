@@ -13,11 +13,13 @@ async function bootstrap() {
     .setDescription('API description')
     .setVersion('1.0')
     .addTag('chat')
+    .addBearerAuth()
     .build();
   const doc = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, doc);
 
   const PORT = process.env.APP_PORT || 3000;
   await app.listen(PORT);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
