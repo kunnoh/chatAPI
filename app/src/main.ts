@@ -10,7 +10,7 @@ async function bootstrap() {
   });
   const config = new DocumentBuilder()
     .setTitle('ChatAPI')
-    .setDescription('API description')
+    .setDescription('ChatAPI description')
     .setVersion('1.0')
     .addTag('chat')
     .addBearerAuth()
