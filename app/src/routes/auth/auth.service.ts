@@ -71,7 +71,7 @@ export class AuthService {
             accessToken: sign({
                 userId: user.id,
               },
-              process.env.ACCESS_SECRET,
+              process.env.ACCESS_TOKEN_SECRET,
               {
                 expiresIn: process.env.EXPIRES,
               })

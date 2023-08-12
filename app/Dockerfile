@@ -1,21 +1,18 @@
-FROM node:alpine AS dev
+FROM node:20-alpine AS dev
 
-WORKDIR /usr/src/app
+WORKDIR /src
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
-RUN npm run build
+RUN npm run build && npm prune --production
 
-FROM node:alpine AS prod
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+FROM node:20-alpine
 
-WORKDIR /usr/src/app
-COPY package*.json ./
+WORKDIR /src
+ENV TZ=Africa/Nairobi
+COPY --from=dev /src/dist /src/dist
+COPY --from=dev /src/node_modules /src/node_modules
 
-RUN npm install --only=prod
-COPY . .
-COPY --from=dev /usr/src/app/dist ./dist
-# EXPOSE 3000
+EXPOSE 3000
 
 CMD [ "node", "dist/main" ]
