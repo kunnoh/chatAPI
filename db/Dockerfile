@@ -1,11 +1,11 @@
 FROM postgres:latest
 
-ENV POSTGRES_USER
-ENV POSTGRES_PASSWORD
-ENV POSTGRES_DB
-ENV POSTGRES_HOST_AUTH_METHOD
+# Install the 'dotenv' tool
+RUN apt-get update && apt-get install -y dos2unix
+COPY .env .env
+RUN dos2unix .env && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/* && rm .env
 
-VOLUME /postgres_data
-EXPOSE 5432
+# Set environment variables from the .env file
+ENV $(cat .env | xargs)
 
 CMD ["postgres"]

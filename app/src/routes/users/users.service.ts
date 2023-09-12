@@ -57,25 +57,25 @@ export class UsersService {
 
     findByEmail(email: string): Promise<User | undefined> {
         const user = this.users.find((e: User) => e.email === email);
-        if(user){
+        if (user) {
             return Promise.resolve(user);
         };
         return undefined;
     }
 
-    findById(id: string): Promise<User | undefined>{
+    findById(id: string): Promise<User | undefined> {
         const user = this.users.find((e: User) => e.id === id);
-        if(user) return Promise.resolve(user);
+        if (user) return Promise.resolve(user);
         return undefined;
     }
 
-    findOne(email: string): Promise<User | undefined>{
-        const user = this.users.find((e: User) => e.email === email);
-        if(user) return Promise.resolve(user);
+    findOne(id: string): Promise<User | undefined> {
+        const user = this.users.find((e: User) => e.id === id);
+        if (user) return Promise.resolve(user);
         return undefined;
     }
 
-    findAll(): Promise<User[] | undefined>{
+    findAll({ page, limit }): Promise<User[] | undefined> {
         return Promise.resolve(this.users);
     }
 }

@@ -10,11 +10,11 @@ async function bootstrap() {
   });
   const config = new DocumentBuilder()
     .setTitle('ChatAPI')
-    .setDescription('ChatAPI description')
+    .setDescription('RESTful Chat Api')
     .setVersion('1.0')
-    .addTag('chat')
     .addBearerAuth()
     .build();
+
   const doc = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, doc);
 

@@ -1,0 +1,12 @@
+APP_PORT=3000
+DB_USER=postgresuser
+DB_HOST=localhost
+DB_PORT=5432
+DB_PASSWD=dbpassword
+DB_NAME=postgres
+DIALECT=postgres
+ACCESS_TOKEN_SECRET=tokensecret
+REFRESH_TOKEN_SECRET=refreshtokensecret
+JWT_EXPIRES_IN=10m
+REFRESH_EXPIRES_IN=1d
+CORS=example.com,www.example.com,blog.example.com,admin.example.com
