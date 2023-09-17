@@ -4,6 +4,8 @@ services:
     build:
       context: ./db
       dockerfile: Dockerfile
+    env_file:
+      - ./db/.env
     volumes:
       - ./db/postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -12,7 +14,7 @@ services:
       timeout: 5s
       retries: 5
 
-  chatapp:
+  app:
     build:
       context: ./app
       dockerfile: Dockerfile

@@ -1,11 +1,13 @@
 FROM postgres:latest
 
-# Install the 'dotenv' tool
-RUN apt-get update && apt-get install -y dos2unix
-COPY .env .env
-RUN dos2unix .env && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/* && rm .env
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=WRSHfzdgdd
+ENV POSTGRES_DB=chatdb
 
-# Set environment variables from the .env file
-ENV $(cat .env | xargs)
+# Copy the SQL script to initialize the database schema
+# COPY init.sql /docker-entrypoint-initdb.d/
+
+# Expose the PostgreSQL port
+EXPOSE 5432
 
 CMD ["postgres"]
