@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HealthModule } from './routes/health/health.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
+import { Chat } from './chat.entity';
 
 @Module({
   imports: [
@@ -23,7 +24,10 @@ import * as path from 'path';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWD'),
         database: configService.get('DB_NAME'),
-        entities: [path.join(__dirname, '**/*.entity{.ts,.js}')],
+        entities: [
+          Chat,
+          path.join(__dirname, './*.entity{.ts,.js}')
+        ],
         synchronize: true,
         autoLoadEntities: true
       }),

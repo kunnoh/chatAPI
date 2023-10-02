@@ -7,7 +7,8 @@ services:
     env_file:
       - ./db/.env
     volumes:
-      - ./db/postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
@@ -20,22 +21,23 @@ services:
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - ./db/.env
+      - ./app/.env
     ports:
       - "3030:3030"
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - ./src:/app/src
     healthcheck:
-      test:
-        [
-          "CMD",
-          "curl",
-          "-f",
-          "http://localhost:3030/healthcheck"
-        ]
+      test: [ "CMD", "curl", "-f", "http://localhost:3030/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
-volumes:
-  postgres_data:
+# volumes:
+  # driver: local
+  #   hostPath:
+  #     path: db
+  # - name: src
+  #   hostPath:
+  #     path: app

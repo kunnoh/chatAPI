@@ -8,6 +8,7 @@ async function bootstrap() {
   app.enableCors({
     origin: '*'
   });
+
   const config = new DocumentBuilder()
     .setTitle('ChatAPI')
     .setDescription('RESTful Chat Api')
@@ -18,7 +19,7 @@ async function bootstrap() {
   const doc = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, doc);
 
-  const PORT = process.env.APP_PORT || 3000;
+  const PORT = process.env.APP_PORT;
   await app.listen(PORT);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }

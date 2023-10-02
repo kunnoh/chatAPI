@@ -4,7 +4,7 @@ WORKDIR /src
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build && npm prune --production
+RUN npm run build && npm prune --omit=dev
 
 FROM node:20-alpine
 
@@ -13,6 +13,6 @@ ENV TZ=Africa/Nairobi
 COPY --from=dev /src/dist /src/dist
 COPY --from=dev /src/node_modules /src/node_modules
 
-EXPOSE 3000
+EXPOSE 3030
 
 CMD [ "node", "dist/main" ]
