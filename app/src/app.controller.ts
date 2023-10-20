@@ -7,8 +7,8 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-  @ApiOperation({ summary: 'home route for the api' })
-  @ApiResponse({ status: 200, description: 'Welcome to chatApi' })
+  @ApiOperation({ summary: 'documentation' })
+  @ApiResponse({ status: 200, description: 'ChatApi documentation' })
   @Get()
   getHello(): { message: string, status } {
     return this.appService.getHello();

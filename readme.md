@@ -1,21 +1,49 @@
-# NestJS and postgres docker-compose
-NestJS backend container with POSTGRES database cotainer
-### Download & install system
-Dowload system from github
-```git clone https://github.com/kunnoh/chatAPI.git```
+# NestJS and Postgres docker-compose
+NestJS backend container with POSTGRES database container
+Docker and docker-compose need to be installed.
 
-### Install the system. it uses docker
-Install needed containers
-```make install```
+docker version
+```sh
+docker -v
+```
 
-### Start the system
-Start the system
-```make start```
+docker-compose version
+```sh
+docker-compose -v
+```
 
-### Restart the system
+**Download & install system**
+Dowload from github
+```sh
+git clone https://github.com/kunnoh/chatAPI.git
+```
+
+**Start the system**
+
+##### Start the system in development mode
+1. This will run postgres image and start app locally with hot reloading.
+2. To run app in development mode, you have to change `.env` `DB_HOST` to be `DB_HOST=localhost`
+
+```sh
+make dev
+```
+
+##### Start the system in production mode
+1. This will run both postgres and app in different docker containers.
+2. To run app in production mode, you have to change `.env` `DB_HOST` to be `DB_HOST=db`
+
+```sh
+make prod
+```
+
+**show app logs**
+show app logs in production mode
+```sh
+make logs-app
+```
+
+**Restart the system**
 Restart the system
-```make restart```
-
-### Rebuild the system
-Rebuild the system from scratch
-```make rebuild```
+```sh
+make restart
+```

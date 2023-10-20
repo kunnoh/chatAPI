@@ -15,7 +15,7 @@ dev:
 app-docker:
 	# docker stop chatApi
 	docker build -t chatapiApp ./app/.
-	docker run -d -p 3000:3030 --name chatApi chatapiApp
+	docker run -d -p 3030:3030 --name chatApi chatapiApp
 
 clean:
 	@if docker ps -a | grep -q ; then \
@@ -59,8 +59,6 @@ prod:
 
 stop:
 	docker-compose down
-	docker stop chatApiDB
-	docker stop chatApi
 
 restart:
 	docker-compose down
