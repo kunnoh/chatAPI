@@ -1,44 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import RefreshToken from './entities/refreshToken.entitie';
 import { UsersService } from 'src/routes/users/users.service';
 import { User } from 'src/routes/users/entities/user.entity';
 import { sign, verify } from 'jsonwebtoken';
+import { LoginDto } from './dto/login.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
     private refreshTokens: RefreshToken[] = [];
 
-    constructor(private userService: UsersService) { }
+    constructor(
+        private jwtService: JwtService,
+        private userService: UsersService
+    ) { }
 
-    async login(
-        email: string,
-        password: string,
-        values: { userAgent: string, ipAddress: string }
-    ): Promise<{ accessToken: string, refreshToken: string } | undefined> {
-        const user = await this.userService.findByEmail(email);
-        if (!user) return undefined;
+    async login(loginUser: LoginDto): Promise<{ accessToken: string, refreshToken: string } | undefined> {
+        const { email, password } = loginUser;
 
-        // TODO: verify using hashing
-        if (user.password !== password) return undefined;
+        const user = await this.userService.GetUser(loginUser.email);
+        if (!user) throw new UnauthorizedException('Invalid email or password');
 
-        return this.newRefreshAccess(user, values);
-    }
+        const passValid = await user.validatePasswd(password);
+        if (!passValid) throw new UnauthorizedException('Invalid email or password');
 
-    async register(
-        {
-            email,
-            password,
-            phone
-        },
-        values: { userAgent: string, ipAddress: string }
-    ): Promise<{ accessToken: string, refreshToken: string } | undefined> {
-        const user = await this.userService.findByEmail(email);
-        if (!user) return undefined;
-
-        // TODO: verify using hashing
-        if (user.password !== password) return undefined;
-
-        return this.newRefreshAccess(user, values);
+        const payload = {
+            sub: user.id,
+            email: user.email,
+        };
+        const token = await this.jwtService.signAsync(payload);
+        // return { accessToken: token };
+        return this.newRefreshAccess(payload);
     }
 
     async logout(refreshStr: string): Promise<void> {
@@ -52,7 +44,7 @@ export class AuthService {
     async refresh(refreshStr: string): Promise<string | undefined> {
         const rf = await this.retrieveRefreshToken(refreshStr);
         if (!rf) return undefined;
-        const user = await this.userService.findOne(rf.userId);
+        const user = await this.userService.GetUser(rf.userId);
         if (!user) return undefined;
 
         const accessToken = {

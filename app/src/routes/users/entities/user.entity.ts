@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+// import * from "bcrypt";
 
 @Entity()
 export class User {
@@ -9,7 +10,7 @@ export class User {
     id: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         default: ''
     })
     username: string;
@@ -32,4 +33,10 @@ export class User {
         default: 0
     })
     phone: number;
+
+    async validatePasswd(password: string): Promise<boolean> {
+        return false
+
+        // return bcrypt.compare(password, this.password);
+    }
 }

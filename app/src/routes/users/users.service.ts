@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity';
+import { RegisterDto } from '../auth/dto/register.dto';
 
 @Injectable()
 export class UsersService {
+    constructor(
+        private userRepo: UserRepo
+    ) { }
     private users: User[] = [
         {
             id: 'tyf54',
@@ -55,7 +59,26 @@ export class UsersService {
         }
     ];
 
-    findByEmail(email: string): Promise<User | undefined> {
+
+    async createUser(regUser: RegisterDto): Promise<{ accessToken: string, refreshToken: string } | undefined> {
+        // try {
+
+        // } catch (err) {
+        //     console.log(err);
+        // }
+        const { email, password } = regUser;
+        const salt = await bcrypt.genSalt();
+        const hashPasswd = await bcrypt.hash(regUser.password, salt);
+
+        const user = new User();
+        user.email = email;
+        user.password = hashPasswd;
+
+        return this.userRepo.save(user);
+        // return this.newRefreshAccess(user, values);
+    }
+
+    GetUser(email: string): Promise<User | undefined> {
         const user = this.users.find((e: User) => e.email === email);
         if (user) {
             return Promise.resolve(user);
@@ -63,19 +86,15 @@ export class UsersService {
         return undefined;
     }
 
-    findById(id: string): Promise<User | undefined> {
-        const user = this.users.find((e: User) => e.id === id);
-        if (user) return Promise.resolve(user);
+    GetUsers({ page, limit }): Promise<User[] | undefined> {
+        return Promise.resolve(this.users);
+    }
+
+    UpdateUser(): Promise<User | undefined> {
         return undefined;
     }
 
-    findOne(id: string): Promise<User | undefined> {
-        const user = this.users.find((e: User) => e.id === id);
-        if (user) return Promise.resolve(user);
-        return undefined;
-    }
-
-    findAll({ page, limit }): Promise<User[] | undefined> {
+    DeleteUser(email: string): Promise<User[] | undefined> {
         return Promise.resolve(this.users);
     }
 }
