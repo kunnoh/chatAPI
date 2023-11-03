@@ -1,6 +1,9 @@
-/db/postgres_data/
-.dockerignore
+.github
+db/
 app/node_modules
 app/npm-debug.log
 app/dist
 db/postgres_data
+makefile
+readme.md
+docker-compose.yml
