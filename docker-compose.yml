@@ -36,3 +36,14 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+  fluentd:
+    container_name: chatfluentd
+    user: root
+    image: fluent/fluent:latest
+    volumes:
+    - /var/lib/docker/containers:/fluentd/log/containers
+    - ./fluent.conf:/fluentd/etc/fluent.conf
+    - ./logs:/output/
+    logging:
+      driver: "local"
