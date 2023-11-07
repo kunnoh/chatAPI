@@ -1,9 +1,9 @@
 FROM node:20-alpine AS dev
 
 WORKDIR /src
-COPY package*.json ./
-RUN npm i
 COPY . .
+# COPY package*.json ./
+RUN npm ci
 RUN npm run build && npm prune --omit=dev
 
 FROM node:20-alpine
