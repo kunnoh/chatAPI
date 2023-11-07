@@ -2,7 +2,7 @@ FROM node:20-alpine AS dev
 
 WORKDIR /src
 COPY package*.json ./
-RUN npm ci
+RUN npm i
 COPY . .
 RUN npm run build && npm prune --omit=dev
 
